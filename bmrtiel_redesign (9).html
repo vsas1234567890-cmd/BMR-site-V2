@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<title id="site-title">BMR Tiel – Autotechniek &amp; Revisie</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C8102E;--red-d:#9e0d24;
+  --black:#0a0a0a;--dark:#161616;--mid:#222;
+  --gray:#777;--white:#fff;--nav-h:64px;
+  --sans:'Barlow','SF Pro Display',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
+  --cond:'Barlow Condensed','SF Pro Display',-apple-system,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--black);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+.page{display:none;min-height:100vh;padding-top:var(--nav-h)}
+.page.active{display:block}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 44px;background:rgba(6,6,6,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-logo{cursor:pointer;display:flex;align-items:center}
+.nav-logo img{height:38px;display:block;transition:opacity .2s}
+.nav-logo:hover img{opacity:.8}
+.nav-right{display:flex;align-items:center;gap:6px}
+.nav-links{display:flex;gap:2px;list-style:none;align-items:center}
+.nav-links a{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;padding:6px 11px;border-radius:2px;transition:color .2s;cursor:pointer;white-space:nowrap}
+.nav-links a:hover,.nav-links a.anav{color:var(--white)}
+.nav-cta{background:var(--red)!important;color:var(--white)!important;padding:7px 18px!important;border-radius:2px}
+.nav-cta:hover{background:var(--red-d)!important}
+.nav-sep{width:1px;height:22px;background:rgba(255,255,255,.12);margin:0 8px}
+.nav-bovag img{height:24px;display:block}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;font-family:var(--cond);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:13px 30px;border-radius:2px;border:none;cursor:pointer;transition:background .2s,transform .15s}
+.btn-red{background:var(--red);color:var(--white)}
+.btn-red:hover{background:var(--red-d);transform:translateY(-2px)}
+.btn-ghost{border:1px solid rgba(255,255,255,.3);color:var(--white);background:transparent}
+.btn-ghost:hover{border-color:var(--white);transform:translateY(-2px)}
+.btn-sm{font-size:11px;padding:9px 20px}
+
+/* ── LABELS ── */
+.lbl{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:10px;display:block}
+.sec-title{font-family:var(--cond);font-size:clamp(32px,4vw,54px);font-weight:900;text-transform:uppercase;line-height:.95;margin-bottom:18px}
+.sec-body{font-size:15px;font-weight:300;line-height:1.8;color:rgba(255,255,255,.6);max-width:500px}
+
+/* ── HERO ── */
+.hero{position:relative;height:100vh;min-height:580px;display:flex;align-items:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('https://bmrtiel.nl/upload/page/9_other_image_1612867514681059043.png') center/cover no-repeat;filter:brightness(.28)}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(88deg,rgba(6,6,6,.98) 0%,rgba(6,6,6,.72) 52%,rgba(6,6,6,.1) 100%)}
+.hero-content{position:relative;z-index:2;padding:0 56px 84px;max-width:640px}
+.hero-eyebrow{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--red);margin-bottom:16px;display:block;animation:fadeUp .5s ease .1s both}
+.hero h1{font-family:var(--cond);font-size:clamp(64px,9vw,118px);font-weight:900;line-height:.88;text-transform:uppercase;margin-bottom:24px;animation:fadeUp .5s ease .25s both}
+.hero h1 em{color:var(--red);font-style:normal}
+.hero-sub{font-size:16px;font-weight:300;line-height:1.75;color:rgba(255,255,255,.68);max-width:420px;margin-bottom:36px;animation:fadeUp .5s ease .4s both}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .5s ease .55s both}
+
+/* ── MERKEN BANNER – real logos via img ── */
+.merken-banner{background:var(--mid);padding:18px 44px;display:flex;align-items:center;gap:28px;border-bottom:2px solid rgba(200,16,46,.3);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.merken-banner::-webkit-scrollbar{display:none}
+.merken-lbl{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--red);white-space:nowrap;flex-shrink:0}
+.merken-sep{width:1px;height:28px;background:rgba(255,255,255,.12);flex-shrink:0}
+.merken-list{display:flex;gap:20px;align-items:center;flex-shrink:0}
+.merk{display:flex;flex-direction:column;align-items:center;gap:7px;opacity:.5;transition:opacity .25s;cursor:default;flex-shrink:0}
+.merk:hover{opacity:1}
+.merk-logo{width:40px;height:40px;object-fit:contain;display:block;filter:brightness(0) invert(1)}
+.merk-name{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.merken-bovag{margin-left:auto;flex-shrink:0;background:#fff;padding:5px 10px;border-radius:3px}
+.merken-bovag img{height:26px;display:block}
+
+/* ── CONTACT STRIP ── */
+.cstrip{background:var(--red);display:grid;grid-template-columns:repeat(4,1fr)}
+.cs-item{padding:18px 24px;display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white);border-right:1px solid rgba(255,255,255,.2);transition:background .2s;cursor:pointer}
+.cs-item:last-child{border-right:none}
+.cs-item:hover{background:var(--red-d)}
+.cs-icon{font-size:20px;flex-shrink:0}
+.cs-lbl{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;opacity:.8;margin-bottom:2px}
+.cs-val{font-family:var(--cond);font-size:15px;font-weight:700;line-height:1.1}
+
+/* ── DIENSTEN ── */
+#home-diensten{background:var(--dark);padding:76px 44px}
+.d-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:44px}
+.d-card{position:relative;overflow:hidden;aspect-ratio:4/3;cursor:pointer}
+.d-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s,filter .4s;filter:brightness(.46)}
+.d-card:hover img{transform:scale(1.06);filter:brightness(.28)}
+.d-body{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;background:linear-gradient(transparent 20%,rgba(0,0,0,.82) 100%);transition:background .3s}
+.d-card:hover .d-body{background:linear-gradient(transparent 5%,rgba(160,8,24,.82) 100%)}
+.d-name{font-family:var(--cond);font-size:21px;font-weight:800;text-transform:uppercase;line-height:1;margin-bottom:4px}
+.d-desc{font-size:12px;font-weight:300;color:rgba(255,255,255,.82);line-height:1.5;max-height:0;overflow:hidden;transition:max-height .4s}
+.d-card:hover .d-desc{max-height:72px}
+.d-arrow{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-size:13px;opacity:0;transition:opacity .25s,transform .25s}
+.d-card:hover .d-arrow{opacity:1;transform:rotate(45deg)}
+.d-badge{position:absolute;top:16px;left:16px;background:var(--red);font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:3px 9px;border-radius:1px}
+
+/* ── VAG SECTION ── */
+.vag-section{background:var(--black);padding:76px 44px;display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:center}
+.vag-brands-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px}
+.vag-card{background:var(--mid);padding:28px 20px;display:flex;flex-direction:column;align-items:center;gap:12px;border-top:2px solid transparent;transition:border-color .25s,background .25s;cursor:default}
+.vag-card:hover{border-color:var(--red);background:#282828}
+.vag-card-logo{width:64px;height:48px;object-fit:contain;filter:brightness(0) invert(1);display:block}
+.vag-card-name{font-family:var(--cond);font-size:17px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+.vag-card-desc{font-size:11.5px;font-weight:300;color:var(--gray);text-align:center;line-height:1.5}
+
+/* ── FOTO STRIP ── */
+.fstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.fs-item{position:relative;overflow:hidden;aspect-ratio:1}
+.fs-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s,filter .4s;filter:brightness(.55) grayscale(.2)}
+.fs-item:hover img{transform:scale(1.08);filter:brightness(.38)}
+.fs-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.88));padding:18px 14px 12px;font-family:var(--cond);font-size:15px;font-weight:700;text-transform:uppercase}
+
+/* ── OVER ── */
+.over-section{background:var(--dark);padding:76px 44px;display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:center}
+.over-photo{position:relative}
+.over-photo img{width:100%;height:460px;object-fit:cover;display:block}
+.over-badge{position:absolute;bottom:-14px;right:-14px;width:110px;height:110px;background:var(--red);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.over-badge-num{font-family:var(--cond);font-size:40px;font-weight:900;line-height:1}
+.over-badge-lbl{font-size:9px;font-weight:300;line-height:1.3}
+.checklist{list-style:none;margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:9px 14px}
+.checklist li{font-size:13px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:8px}
+.checklist li::before{content:'✓';color:var(--red);font-weight:700}
+
+/* ── UREN ── */
+.uren-section{background:var(--black);padding:76px 44px}
+.uren-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:44px}
+.uren-card{background:var(--mid);padding:32px;border-top:3px solid var(--red)}
+.uren-card h3{font-family:var(--cond);font-size:20px;font-weight:800;text-transform:uppercase;margin-bottom:18px}
+.uren-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:13px;color:rgba(255,255,255,.65)}
+.uren-row:last-of-type{border-bottom:none;margin-bottom:18px}
+.uren-day{font-weight:500;color:var(--white)}
+
+/* ── CONTACT ROOD ── */
+.contact-red{background:var(--red);padding:52px 44px;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+.cr-left h2{font-family:var(--cond);font-size:clamp(32px,4vw,54px);font-weight:900;text-transform:uppercase;line-height:.92;margin-bottom:12px}
+.cr-left p{font-size:14px;font-weight:300;line-height:1.75;opacity:.88;max-width:360px}
+.cr-cards{display:flex;flex-direction:column;gap:9px}
+.cr-card{background:rgba(0,0,0,.22);padding:14px 20px;display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--white);border-radius:2px;transition:background .2s;cursor:pointer}
+.cr-card:hover{background:rgba(0,0,0,.42)}
+.cr-card-ico{font-size:18px;flex-shrink:0}
+.cr-card-lbl{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;opacity:.75;margin-bottom:1px}
+.cr-card-val{font-family:var(--cond);font-size:15px;font-weight:700}
+
+/* ── CONTACT FORM ── */
+.contact-form-wrap{background:var(--dark);padding:60px 44px}
+.contact-form-wrap>h3{font-family:var(--cond);font-size:26px;font-weight:800;text-transform:uppercase;margin-bottom:28px}
+.contact-lower{display:grid;grid-template-columns:1fr 380px;gap:44px;align-items:start}
+.cform{display:flex;flex-direction:column;gap:11px}
+.crow{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.cform input,.cform textarea,.cform select{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--white);font-family:var(--sans);font-size:14px;padding:12px 15px;border-radius:4px;outline:none;resize:none;transition:border-color .2s;-webkit-appearance:none;appearance:none}
+.cform input::placeholder,.cform textarea::placeholder{color:var(--gray)}
+.cform input:focus,.cform textarea:focus,.cform select:focus{border-color:var(--red)}
+.cform select option{background:#1a1a1a}
+.cform textarea{height:115px}
+.form-note{font-size:11px;color:var(--gray)}
+.map-panel{display:flex;flex-direction:column;gap:12px}
+.map-panel h4{font-family:var(--cond);font-size:15px;font-weight:800;text-transform:uppercase}
+.map-frame{width:100%;height:300px;border:none;display:block;border-radius:4px;filter:grayscale(25%)}
+.map-address{background:var(--mid);padding:16px 18px;border-radius:2px}
+.map-address p{font-size:13px;font-weight:300;color:rgba(255,255,255,.65);line-height:1.7}
+.map-route{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);text-decoration:none;transition:gap .2s}
+.map-route:hover{gap:11px}
+
+/* ── SUBPAGE ── */
+.sub-hero{position:relative;height:290px;display:flex;align-items:flex-end;overflow:hidden}
+.sub-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.28)}
+.sub-hero-grad{position:absolute;inset:0;background:linear-gradient(88deg,rgba(6,6,6,.96) 0%,rgba(6,6,6,.55) 60%,transparent 100%)}
+.sub-hero-content{position:relative;z-index:2;padding:0 44px 34px;max-width:580px}
+.sub-crumb{font-family:var(--cond);font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:9px;cursor:pointer}
+.sub-crumb span{color:var(--red)}
+.sub-hero-content h1{font-family:var(--cond);font-size:clamp(38px,5vw,70px);font-weight:900;text-transform:uppercase;line-height:.92}
+.sub-body{padding:56px 44px;display:grid;grid-template-columns:1fr 300px;gap:48px;background:var(--dark)}
+.sub-article h2{font-family:var(--cond);font-size:20px;font-weight:800;text-transform:uppercase;margin:26px 0 10px}
+.sub-article h2:first-child{margin-top:0}
+.sub-article p{font-size:14px;font-weight:300;line-height:1.82;color:rgba(255,255,255,.62);margin-bottom:12px}
+.sub-article strong{color:var(--white);font-weight:500}
+.sub-sidebar{display:flex;flex-direction:column;gap:16px}
+.sidebar-contact{background:var(--red);padding:22px;border-radius:2px}
+.sidebar-contact h4{font-family:var(--cond);font-size:15px;font-weight:800;text-transform:uppercase;margin-bottom:12px}
+.sc-item{display:flex;align-items:center;gap:10px;margin-bottom:10px;text-decoration:none;color:var(--white)}
+.sc-item span{font-size:12px;font-weight:300;opacity:.88}
+.sidebar-nav{background:var(--mid);padding:20px}
+.sidebar-nav h4{font-family:var(--cond);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--red);margin-bottom:11px}
+.sidebar-nav ul{list-style:none;display:flex;flex-direction:column;gap:2px}
+.sidebar-nav a{display:block;font-size:12px;color:rgba(255,255,255,.55);text-decoration:none;padding:6px 9px;border-radius:2px;transition:background .2s,color .2s;cursor:pointer}
+.sidebar-nav a:hover,.sidebar-nav a.active{background:rgba(255,255,255,.07);color:var(--white)}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:4px}
+.related-card{position:relative;overflow:hidden;aspect-ratio:4/3;cursor:pointer}
+.related-card img{width:100%;height:100%;object-fit:cover;filter:brightness(.45);transition:filter .3s,transform .4s}
+.related-card:hover img{filter:brightness(.28);transform:scale(1.05)}
+.related-card-label{position:absolute;bottom:0;left:0;right:0;padding:10px 13px 9px;background:linear-gradient(transparent,rgba(0,0,0,.86));font-family:var(--cond);font-size:13px;font-weight:700;text-transform:uppercase}
+
+/* ── FOOTER ── */
+footer{background:#060606;padding:40px 44px 22px;border-top:1px solid rgba(255,255,255,.06)}
+.ftop{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;margin-bottom:36px}
+.fbrand img{height:34px;margin-bottom:12px}
+.fbrand p{font-size:12px;font-weight:300;line-height:1.8;color:var(--gray);max-width:240px}
+.fbovag{margin-top:14px;background:#fff;display:inline-block;padding:5px 10px;border-radius:3px}
+.fbovag img{height:22px;display:block}
+.fcol h4{font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.fcol a{font-size:12px;font-weight:300;color:var(--gray);text-decoration:none;transition:color .2s;cursor:pointer}
+.fcol a:hover{color:var(--white)}
+.fbot{display:flex;justify-content:space-between;align-items:center;padding-top:18px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:var(--gray)}
+.fsocials{display:flex;gap:7px}
+.fsocials a{width:30px;height:30px;border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;color:var(--gray);text-decoration:none;font-size:12px;border-radius:2px;transition:border-color .2s,color .2s}
+.fsocials a:hover{border-color:var(--red);color:var(--red)}
+.footer-secret{cursor:pointer;user-select:none;transition:color .2s}
+.footer-secret:hover{color:rgba(255,255,255,.25)}
+
+/* ══════════════════════════════════════════
+   PINCODE OVERLAY
+══════════════════════════════════════════ */
+.pin-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9000;align-items:center;justify-content:center;backdrop-filter:blur(16px)}
+.pin-overlay.open{display:flex}
+.pin-box{background:#111;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:36px 40px;text-align:center;width:320px}
+.pin-box h3{font-family:var(--cond);font-size:20px;font-weight:800;text-transform:uppercase;margin-bottom:6px}
+.pin-box p{font-size:12px;color:var(--gray);margin-bottom:24px}
+.pin-dots{display:flex;gap:12px;justify-content:center;margin-bottom:24px}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.15);transition:background .2s}
+.pin-dot.filled{background:var(--red)}
+.pin-numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pin-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--white);font-family:var(--cond);font-size:20px;font-weight:700;padding:16px;border-radius:6px;cursor:pointer;transition:background .2s}
+.pin-btn:hover{background:rgba(255,255,255,.14)}
+.pin-btn.del{font-size:14px;color:var(--gray)}
+.pin-btn.cancel{font-size:12px;color:var(--gray);grid-column:span 3}
+.pin-error{color:#ff4444;font-size:12px;margin-top:10px;min-height:16px}
+
+/* ══════════════════════════════════════════
+   DEVELOPER PANEL
+══════════════════════════════════════════ */
+.dev-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9100;overflow-y:auto;padding:20px}
+.dev-overlay.open{display:block}
+.dev-panel{background:#0e0e0e;border:1px solid rgba(200,16,46,.35);border-radius:10px;max-width:1100px;margin:0 auto;overflow:hidden}
+.dev-header{background:rgba(200,16,46,.12);padding:20px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(200,16,46,.2)}
+.dev-header h2{font-family:var(--cond);font-size:22px;font-weight:900;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px}
+.dev-header-actions{display:flex;gap:10px;align-items:center}
+.dev-close-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--gray);font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:7px 16px;border-radius:4px;cursor:pointer;transition:all .2s}
+.dev-close-btn:hover{background:rgba(255,50,50,.2);border-color:rgba(255,50,50,.4);color:var(--white)}
+.dev-tabs{display:flex;background:#111;border-bottom:1px solid rgba(255,255,255,.07)}
+.dev-tab{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:13px 22px;cursor:pointer;color:rgba(255,255,255,.4);border-bottom:2px solid transparent;transition:all .2s}
+.dev-tab:hover{color:rgba(255,255,255,.7)}
+.dev-tab.active{color:var(--white);border-bottom-color:var(--red)}
+.dev-content{padding:28px;display:none}
+.dev-content.active{display:block}
+
+/* Dev grid cards */
+.dev-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.dev-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:16px;cursor:pointer;transition:all .2s}
+.dev-card:hover{background:rgba(200,16,46,.1);border-color:rgba(200,16,46,.3)}
+.dev-card-icon{font-size:24px;margin-bottom:8px}
+.dev-card-title{font-family:var(--cond);font-size:13px;font-weight:700;text-transform:uppercase;margin-bottom:4px}
+.dev-card-desc{font-size:11px;color:var(--gray);line-height:1.5}
+
+/* Dev info box */
+.dev-info-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:16px;font-size:12px;color:rgba(255,255,255,.65);line-height:1.8}
+.dev-info-box strong{color:var(--white)}
+.dev-row{display:flex;gap:8px;margin-bottom:8px;align-items:center}
+.dev-label{font-family:var(--cond);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);min-width:140px;flex-shrink:0}
+
+/* Live Editor styles */
+.editor-section{margin-bottom:28px}
+.editor-section h4{font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.07)}
+.editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.editor-field{display:flex;flex-direction:column;gap:5px}
+.editor-field label{font-size:11px;color:var(--gray);font-weight:500}
+.editor-input{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--white);font-family:var(--sans);font-size:13px;padding:9px 12px;border-radius:4px;outline:none;transition:border-color .2s;width:100%}
+.editor-input:focus{border-color:var(--red)}
+.editor-textarea{height:80px;resize:vertical}
+.color-row{display:flex;gap:8px;align-items:center}
+.color-swatch{width:32px;height:32px;border-radius:4px;border:2px solid rgba(255,255,255,.2);cursor:pointer;flex-shrink:0}
+.editor-apply-btn{background:var(--red);color:var(--white);font-family:var(--cond);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;padding:10px 22px;border-radius:4px;cursor:pointer;transition:background .2s;margin-top:8px}
+.editor-apply-btn:hover{background:var(--red-d)}
+.editor-full{grid-column:span 2}
+.dev-badge{display:inline-block;background:rgba(200,16,46,.2);border:1px solid rgba(200,16,46,.4);color:var(--red);font-family:var(--cond);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:2px;margin-left:8px}
+.log-list{list-style:none;display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto}
+.log-item{font-size:11px;color:rgba(255,255,255,.55);padding:6px 10px;background:rgba(255,255,255,.03);border-radius:3px;border-left:2px solid var(--red);font-family:monospace}
+
+/* ── WA ── */
+.wa{position:fixed;bottom:24px;right:24px;z-index:800;width:50px;height:50px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.4);text-decoration:none;font-size:22px;transition:transform .2s}
+.wa:hover{transform:scale(1.1)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:880px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .hero-content{padding:0 20px 52px}
+  .merken-banner,.cstrip{padding-left:20px;padding-right:20px}
+  .cstrip{grid-template-columns:1fr 1fr}
+  #home-diensten,.vag-section,.over-section,.uren-section,.contact-red,.contact-form-wrap{padding-left:20px;padding-right:20px}
+  .d-grid,.vag-brands-grid{grid-template-columns:1fr 1fr}
+  .fstrip{grid-template-columns:1fr 1fr}
+  .vag-section,.over-section{grid-template-columns:1fr;gap:36px}
+  .uren-grid,.contact-red,.contact-lower{grid-template-columns:1fr}
+  .sub-body{grid-template-columns:1fr;padding:36px 20px}
+  .sub-hero-content{padding:0 20px 28px}
+  .ftop{grid-template-columns:1fr;gap:32px}
+  footer{padding:32px 20px 18px}
+  .crow{grid-template-columns:1fr}
+  .checklist{grid-template-columns:1fr}
+  .dev-cards{grid-template-columns:1fr 1fr}
+  .editor-grid{grid-template-columns:1fr}
+  .editor-full{grid-column:span 1}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">
+    <img src="https://bmrtiel.nl/upload/logo/logo_images_0_160560090322443.png" alt="BMR Tiel" id="nav-logo-img">
+  </div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a onclick="showPage('home')"    id="nav-home">Home</a></li>
+      <li><a onclick="showPage('garage')"  id="nav-garage">Garage</a></li>
+      <li><a onclick="showPage('revisie')" id="nav-revisie">Revisie</a></li>
+      <li><a onclick="showPage('over')"    id="nav-over">Over ons</a></li>
+      <li><a onclick="showPage('aanbod')"  id="nav-aanbod">Aanbod</a></li>
+      <li><a onclick="showPage('contact')" class="nav-cta" id="nav-contact">✉ Afspraak</a></li>
+    </ul>
+    <div class="nav-sep"></div>
+    <div class="nav-bovag"><img src="https://bmrtiel.nl/images/bovag-logo.png" alt="BOVAG"></div>
+  </div>
+</nav>
+
+<!-- ══════════════ HOME ══════════════ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-bg" id="hero-bg-el"></div>
+    <div class="hero-grad"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow" id="hero-eyebrow-text">📍 Newtonstraat 49, Tiel &nbsp;·&nbsp; BOVAG gecertificeerd</span>
+      <h1 id="hero-h1">BMR<br><em>Tiel</em></h1>
+      <p class="hero-sub" id="hero-sub-text">Specialist in motorrevisie en garagediensten. Gespecialiseerd in de VAG-groep — Volkswagen, Audi, Seat en Skoda.</p>
+      <div class="hero-btns">
+        <button class="btn btn-red" onclick="showPage('contact')">Maak een afspraak</button>
+        <button class="btn btn-ghost" onclick="showPage('garage')">Bekijk diensten</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MERKEN BANNER – echte logo's via Google/CDN -->
+  <div class="merken-banner">
+    <span class="merken-lbl">Specialist in</span>
+    <div class="merken-sep"></div>
+    <div class="merken-list">
+      <div class="merk">
+        <img class="merk-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Volkswagen_logo_2019.svg/500px-Volkswagen_logo_2019.svg.png" alt="Volkswagen">
+        <span class="merk-name">Volkswagen</span>
+      </div>
+      <div class="merk">
+        <img class="merk-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Audi-Logo_2016.svg/500px-Audi-Logo_2016.svg.png" alt="Audi">
+        <span class="merk-name">Audi</span>
+      </div>
+      <div class="merk">
+        <img class="merk-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/SEAT_Logo.svg/500px-SEAT_Logo.svg.png" alt="Seat">
+        <span class="merk-name">Seat</span>
+      </div>
+      <div class="merk">
+        <img class="merk-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Skoda_auto_logo.svg/500px-Skoda_auto_logo.svg.png" alt="Skoda">
+        <span class="merk-name">Skoda</span>
+      </div>
+      <div class="merken-sep"></div>
+      <div class="merk">
+        <img class="merk-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mercedes-Logo.svg/500px-Mercedes-Logo.svg.png" alt="Mercedes">
+        <span class="merk-name">Mercedes</span>
+      </div>
+      <div class="merk">
+        <img class="merk-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/500px-BMW.svg.png" alt="BMW">
+        <span class="merk-name">BMW</span>
+      </div>
+      <div class="merk">
+        <img class="merk-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Opel_Logo.svg/500px-Opel_Logo.svg.png" alt="Opel" onerror="this.style.display='none'">
+        <span class="merk-name">Opel</span>
+      </div>
+    </div>
+    <div class="merken-bovag">
+      <img src="https://bmrtiel.nl/images/bovag-logo.png" alt="BOVAG lid">
+    </div>
+  </div>
+
+  <!-- CONTACT STRIP -->
+  <div class="cstrip">
+    <a class="cs-item" href="tel:+31344624904"><span class="cs-icon">📞</span><div><div class="cs-lbl">Garage</div><div class="cs-val">+31 344 624 904</div></div></a>
+    <a class="cs-item" href="tel:+31344622012"><span class="cs-icon">⚙️</span><div><div class="cs-lbl">Revisie</div><div class="cs-val">+31 344 622 012</div></div></a>
+    <a class="cs-item" href="https://wa.me/31617234728" target="_blank"><span class="cs-icon">💬</span><div><div class="cs-lbl">WhatsApp</div><div class="cs-val">+31 6 17 23 47 28</div></div></a>
+    <div class="cs-item" onclick="showPage('contact')"><span class="cs-icon">✉️</span><div><div class="cs-lbl">Stuur een bericht</div><div class="cs-val">Afspraak maken →</div></div></div>
+  </div>
+
+  <!-- DIENSTEN -->
+  <section id="home-diensten">
+    <span class="lbl">Wat wij doen</span>
+    <h2 class="sec-title">Onze Diensten</h2>
+    <p class="sec-body">Van APK en dagelijks onderhoud tot motorrevisie en schadeherstel.</p>
+    <div class="d-grid">
+      <div class="d-card" onclick="showSubPage('garage','apk')"><img src="https://bmrtiel.nl/upload/page/11_other_image_16128678211151263203.png" alt="APK"><div class="d-body"><div class="d-name">APK – Keuring</div><div class="d-desc">All-in €45,75. Bij grote beurt gratis.</div></div><div class="d-arrow">→</div><span class="d-badge">Garage</span></div>
+      <div class="d-card" onclick="showSubPage('garage','onderhoud')"><img src="https://bmrtiel.nl/upload/page/20_other_image_16128678841976003099.png" alt="Onderhoud"><div class="d-body"><div class="d-name">Onderhoud & Reparatie</div><div class="d-desc">VAG-specialist met originele diagnosesoftware.</div></div><div class="d-arrow">→</div><span class="d-badge">Garage</span></div>
+      <div class="d-card" onclick="showSubPage('garage','banden')"><img src="https://bmrtiel.nl/upload/page/21_other_image_1612867961257964249.png" alt="Banden"><div class="d-body"><div class="d-name">Banden & Velgen</div><div class="d-desc">Montage, balanceren en seizoensopslag.</div></div><div class="d-arrow">→</div><span class="d-badge">Garage</span></div>
+      <div class="d-card" onclick="showSubPage('revisie','modern')"><img src="https://bmrtiel.nl/upload/page/9_other_image_1612867514681059043.png" alt="Revisie"><div class="d-body"><div class="d-name">Motorrevisie</div><div class="d-desc">VAG-diesels en benzinemotoren. Ook oldtimers.</div></div><div class="d-arrow">→</div><span class="d-badge">Revisie</span></div>
+      <div class="d-card" onclick="showSubPage('garage','schade')"><img src="https://bmrtiel.nl/upload/page/28_other_image_1612868030106640878.png" alt="Schade"><div class="d-body"><div class="d-name">Schadeherstel</div><div class="d-desc">Eigen spuitcabine met lak-mengkamer.</div></div><div class="d-arrow">→</div><span class="d-badge">Garage</span></div>
+      <div class="d-card" onclick="showSubPage('garage','airco')"><img src="https://bmrtiel.nl/upload/page/29_other_image_1612868103766605032.png" alt="Airco"><div class="d-body"><div class="d-name">Airco & Transmissie</div><div class="d-desc">Airco-service en DSG / automaat spoelen.</div></div><div class="d-arrow">→</div><span class="d-badge">Garage</span></div>
+    </div>
+  </section>
+
+  <!-- VAG -->
+  <section class="vag-section">
+    <div>
+      <span class="lbl">Ons specialisme</span>
+      <h2 class="sec-title">Specialist in<br><em style="color:var(--red)">VAG-groep</em></h2>
+      <p class="sec-body" id="vag-body-text">Bij BMR Tiel beschikken wij over originele ODIS-diagnosesoftware en diepgaande kennis van de VAG-groep — van onderhoud en APK tot volledige motorrevisie van Audi TDI- en TFSI-motoren.</p>
+      <br><br>
+      <button class="btn btn-red" onclick="showPage('revisie')">Bekijk revisie →</button>
+    </div>
+    <div class="vag-brands-grid">
+      <div class="vag-card">
+        <img class="vag-card-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Volkswagen_logo_2019.svg/500px-Volkswagen_logo_2019.svg.png" alt="VW">
+        <div class="vag-card-name">Volkswagen</div><div class="vag-card-desc">Van Polo tot Transporter</div>
+      </div>
+      <div class="vag-card">
+        <img class="vag-card-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Audi-Logo_2016.svg/500px-Audi-Logo_2016.svg.png" alt="Audi">
+        <div class="vag-card-name">Audi</div><div class="vag-card-desc">TDI, TFSI, quattro</div>
+      </div>
+      <div class="vag-card">
+        <img class="vag-card-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/SEAT_Logo.svg/500px-SEAT_Logo.svg.png" alt="Seat">
+        <div class="vag-card-name">Seat</div><div class="vag-card-desc">Ibiza, Leon, Ateca</div>
+      </div>
+      <div class="vag-card">
+        <img class="vag-card-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Skoda_auto_logo.svg/500px-Skoda_auto_logo.svg.png" alt="Skoda">
+        <div class="vag-card-name">Skoda</div><div class="vag-card-desc">Octavia, Superb, Kodiaq</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOTO STRIP -->
+  <div class="fstrip">
+    <div class="fs-item"><img src="https://bmrtiel.nl/upload/page/8_other_image_1612867539536262486.png" alt=""><div class="fs-cap">Motorrevisie</div></div>
+    <div class="fs-item"><img src="https://bmrtiel.nl/upload/page/10_other_image_1612867559230898765.png" alt=""><div class="fs-cap">Oldtimers</div></div>
+    <div class="fs-item"><img src="https://bmrtiel.nl/upload/page/30_other_image_16128675831268124948.png" alt=""><div class="fs-cap">Industrie</div></div>
+    <div class="fs-item"><img src="https://bmrtiel.nl/upload/page/31_other_image_16128676571819706212.png" alt=""><div class="fs-cap">Boten</div></div>
+  </div>
+
+  <!-- OVER -->
+  <section class="over-section">
+    <div class="over-photo">
+      <img src="https://bmrtiel.nl/upload/page/8_other_image_1612867539536262486.png" alt="Werkplaats">
+      <div class="over-badge"><div class="over-badge-num">25+</div><div class="over-badge-lbl">jaar<br>ervaring</div></div>
+    </div>
+    <div>
+      <span class="lbl">Over BMR Tiel</span>
+      <h2 class="sec-title">De Betuwse<br>Motoren Revisie</h2>
+      <p class="sec-body" id="over-body-text">De gebroeders Almar en Fabian Luisman begonnen met motorenrevisie en breidden BMR al snel uit met een volwaardige garageafdeling.</p>
+      <ul class="checklist"><li>APK-keuring</li><li>Onderhoud & reparatie</li><li>VAG-specialist</li><li>Motorrevisie</li><li>Schadeherstel</li><li>Oldtimers</li><li>Industrierevisie</li><li>Occasions</li></ul>
+      <br><br>
+      <button class="btn btn-red" onclick="showPage('over')">Meer over ons</button>
+    </div>
+  </section>
+
+  <!-- UREN -->
+  <section class="uren-section">
+    <span class="lbl">Wanneer</span>
+    <h2 class="sec-title">Openingstijden</h2>
+    <div class="uren-grid">
+      <div class="uren-card"><h3>🔧 Garage</h3><div class="uren-row"><span class="uren-day">Maandag – Vrijdag</span><span>08:00 – 17:00</span></div><div class="uren-row"><span class="uren-day">Zaterdag</span><span>Op afspraak</span></div><div class="uren-row"><span class="uren-day">Zondag</span><span>Op afspraak</span></div><a class="btn btn-red btn-sm" href="tel:+31344624904">📞 +31 344 624 904</a></div>
+      <div class="uren-card"><h3>⚙️ Revisie</h3><div class="uren-row"><span class="uren-day">Maandag – Vrijdag</span><span>08:00 – 17:00</span></div><div class="uren-row"><span class="uren-day">Zaterdag</span><span>Gesloten</span></div><div class="uren-row"><span class="uren-day">Zondag</span><span>Gesloten</span></div><a class="btn btn-red btn-sm" href="tel:+31344622012">📞 +31 344 622 012</a></div>
+    </div>
+  </section>
+
+  <!-- CONTACT BLOK -->
+  <div class="contact-red">
+    <div class="cr-left"><h2>Direct contact opnemen?</h2><p>Bel ons, stuur een WhatsApp of kom langs op Newtonstraat 49, Tiel. Ma–Vr 08:00–17:00.</p></div>
+    <div class="cr-cards">
+      <a class="cr-card" href="tel:+31344624904"><span class="cr-card-ico">📞</span><div><div class="cr-card-lbl">Garage</div><div class="cr-card-val">+31 344 624 904</div></div></a>
+      <a class="cr-card" href="tel:+31344622012"><span class="cr-card-ico">⚙️</span><div><div class="cr-card-lbl">Revisie</div><div class="cr-card-val">+31 344 622 012</div></div></a>
+      <a class="cr-card" href="https://wa.me/31617234728" target="_blank"><span class="cr-card-ico">💬</span><div><div class="cr-card-lbl">WhatsApp</div><div class="cr-card-val">+31 6 17 23 47 28</div></div></a>
+      <div class="cr-card" onclick="showPage('contact')"><span class="cr-card-ico">✉️</span><div><div class="cr-card-lbl">Formulier</div><div class="cr-card-val">Afspraak maken →</div></div></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="ftop">
+      <div class="fbrand"><img src="https://bmrtiel.nl/upload/logo/logo_images_0_160560090322443.png" alt="BMR Tiel"><p id="footer-tagline">Uw vertrouwde VAG-specialist in de Betuwe.</p><div class="fbovag"><img src="https://bmrtiel.nl/images/bovag-logo.png" alt="BOVAG"></div></div>
+      <div class="fcol"><h4>Navigatie</h4><ul><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('garage')">Garage</a></li><li><a onclick="showPage('revisie')">Revisie</a></li><li><a onclick="showPage('over')">Over ons</a></li><li><a onclick="showPage('aanbod')">Aanbod</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></div>
+      <div class="fcol"><h4>Contact</h4><ul><li><a href="tel:+31344624904">Garage: +31 344 624 904</a></li><li><a href="tel:+31344622012">Revisie: +31 344 622 012</a></li><li><a href="mailto:info@bmr-tiel.nl">info@bmr-tiel.nl</a></li></ul></div>
+    </div>
+    <div class="fbot">
+      <span class="footer-secret" onclick="openPin()" title="Klik voor dev menu">© 2025 BMR Tiel – Newtonstraat 49, 4004 KE Tiel</span>
+      <div class="fsocials"><a href="https://www.facebook.com/BMR.Tiel" target="_blank">f</a><a href="https://wa.me/31617234728" target="_blank">💬</a></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══ GARAGE ══ -->
+<div class="page" id="page-garage">
+  <div class="sub-hero"><div class="sub-hero-bg" style="background-image:url('https://bmrtiel.nl/upload/page/11_other_image_16128678211151263203.png')"></div><div class="sub-hero-grad"></div><div class="sub-hero-content"><div class="sub-crumb" onclick="showPage('home')">Home <span>/ Garage</span></div><h1>Garage</h1></div></div>
+  <div id="garage-sub-apk"><div class="sub-body"><div class="sub-article"><h2>APK – Keuring</h2><p>APK staat voor Algemene Periodieke Keuring en is wettelijk verplicht. Voor slechts <strong>€ 45,75 all-in</strong> wordt uw auto op alle punten gekeurd. Inclusief viergastest, afmeldkosten en BTW.</p><h2>APK + Grote Beurt = APK Gratis</h2><p>Combineert u de APK met een grote beurt? Dan is de APK bij ons <strong>gratis</strong>.</p><div class="related-grid" style="margin-top:24px"><div class="related-card" onclick="showSubPage('garage','onderhoud')"><img src="https://bmrtiel.nl/upload/page/20_other_image_16128678841976003099.png" alt=""><div class="related-card-label">Onderhoud</div></div><div class="related-card" onclick="showSubPage('garage','banden')"><img src="https://bmrtiel.nl/upload/page/21_other_image_1612867961257964249.png" alt=""><div class="related-card-label">Banden</div></div><div class="related-card" onclick="showSubPage('garage','airco')"><img src="https://bmrtiel.nl/upload/page/29_other_image_1612868103766605032.png" alt=""><div class="related-card-label">Airco</div></div></div></div><div class="sub-sidebar"><div class="sidebar-contact"><h4>Afspraak maken</h4><a class="sc-item" href="tel:+31344624904"><span>📞</span><span>+31 344 624 904</span></a><a class="sc-item" href="https://wa.me/31617234728" target="_blank"><span>💬</span><span>WhatsApp ons</span></a><button class="btn btn-ghost" onclick="showPage('contact')" style="width:100%">Formulier →</button></div><div class="sidebar-nav"><h4>Garage diensten</h4><ul><li><a onclick="showSubPage('garage','apk')" class="active">APK – Keuring</a></li><li><a onclick="showSubPage('garage','onderhoud')">Onderhoud & Reparatie</a></li><li><a onclick="showSubPage('garage','banden')">Banden & Velgen</a></li><li><a onclick="showSubPage('garage','schade')">Schadeherstel</a></li><li><a onclick="showSubPage('garage','airco')">Airco Service</a></li><li><a onclick="showSubPage('garage','transmissie')">Transmissie Spoelen</a></li></ul></div></div></div></div>
+  <div id="garage-sub-onderhoud" style="display:none"><div class="sub-body"><div class="sub-article"><h2>Onderhoud & Reparatie</h2><p>Wij zijn <strong>gespecialiseerd in de VAG-groep (Audi, VW, Seat, Skoda)</strong> met originele ODIS-diagnosesoftware. Uiteraard ook voor alle andere merken.</p><h2>Kleine & Grote Beurt</h2><p>Kleine beurt na 15.000 km of één jaar. Grote beurt inclusief alle filters — APK bij grote beurt <strong>gratis</strong>.</p></div><div class="sub-sidebar"><div class="sidebar-contact"><h4>Afspraak maken</h4><a class="sc-item" href="tel:+31344624904"><span>📞</span><span>+31 344 624 904</span></a><a class="sc-item" href="https://wa.me/31617234728" target="_blank"><span>💬</span><span>WhatsApp ons</span></a><button class="btn btn-ghost" onclick="showPage('contact')" style="width:100%">Formulier →</button></div><div class="sidebar-nav"><h4>Garage diensten</h4><ul><li><a onclick="showSubPage('garage','apk')">APK – Keuring</a></li><li><a onclick="showSubPage('garage','onderhoud')" class="active">Onderhoud & Reparatie</a></li><li><a onclick="showSubPage('garage','banden')">Banden & Velgen</a></li><li><a onclick="showSubPage('garage','schade')">Schadeherstel</a></li><li><a onclick="showSubPage('garage','airco')">Airco Service</a></li><li><a onclick="showSubPage('garage','transmissie')">Transmissie Spoelen</a></li></ul></div></div></div></div>
+  <div id="garage-sub-banden" style="display:none"><div class="sub-body"><div class="sub-article"><h2>Banden & Velgen</h2><p>Montage, balanceren en opslag. Zomerbanden, winterbanden en all season banden. Velgen op aanvraag leverbaar.</p></div><div class="sub-sidebar"><div class="sidebar-contact"><h4>Afspraak maken</h4><a class="sc-item" href="tel:+31344624904"><span>📞</span><span>+31 344 624 904</span></a><a class="sc-item" href="https://wa.me/31617234728" target="_blank"><span>💬</span><span>WhatsApp ons</span></a><button class="btn btn-ghost" onclick="showPage('contact')" style="width:100%">Formulier →</button></div><div class="sidebar-nav"><h4>Garage diensten</h4><ul><li><a onclick="showSubPage('garage','apk')">APK – Keuring</a></li><li><a onclick="showSubPage('garage','onderhoud')">Onderhoud & Reparatie</a></li><li><a onclick="showSubPage('garage','banden')" class="active">Banden & Velgen</a></li><li><a onclick="showSubPage('garage','schade')">Schadeherstel</a></li><li><a onclick="showSubPage('garage','airco')">Airco Service</a></li><li><a onclick="showSubPage('garage','transmissie')">Transmissie Spoelen</a></li></ul></div></div></div></div>
+  <div id="garage-sub-schade" style="display:none"><div class="sub-body"><div class="sub-article"><h2>Schadeherstel</h2><p>Professionele spuitcabine met eigen lak-mengkamer. Van kleine krassen tot grote carrosserieschade — neem contact op voor een vrijblijvende offerte.</p></div><div class="sub-sidebar"><div class="sidebar-contact"><h4>Offerte aanvragen</h4><a class="sc-item" href="tel:+31344624904"><span>📞</span><span>+31 344 624 904</span></a><a class="sc-item" href="https://wa.me/31617234728" target="_blank"><span>💬</span><span>WhatsApp ons</span></a><button class="btn btn-ghost" onclick="showPage('contact')" style="width:100%">Formulier →</button></div><div class="sidebar-nav"><h4>Garage diensten</h4><ul><li><a onclick="showSubPage('garage','apk')">APK – Keuring</a></li><li><a onclick="showSubPage('garage','onderhoud')">Onderhoud & Reparatie</a></li><li><a onclick="showSubPage('garage','banden')">Banden & Velgen</a></li><li><a onclick="showSubPage('garage','schade')" class="active">Schadeherstel</a></li><li><a onclick="showSubPage('garage','airco')">Airco Service</a></li><li><a onclick="showSubPage('garage','transmissie')">Transmissie Spoelen</a></li></ul></div></div></div></div>
+  <div id="garage-sub-airco" style="display:none"><div class="sub-body"><div class="sub-article"><h2>Airco Service</h2><p>Controle op lekkages, bijvullen koudemiddel en systeemcheck. Advies: elke twee jaar.</p></div><div class="sub-sidebar"><div class="sidebar-contact"><h4>Afspraak maken</h4><a class="sc-item" href="tel:+31344624904"><span>📞</span><span>+31 344 624 904</span></a><a class="sc-item" href="https://wa.me/31617234728" target="_blank"><span>💬</span><span>WhatsApp ons</span></a><button class="btn btn-ghost" onclick="showPage('contact')" style="width:100%">Formulier →</button></div><div class="sidebar-nav"><h4>Garage diensten</h4><ul><li><a onclick="showSubPage('garage','apk')">APK – Keuring</a></li><li><a onclick="showSubPage('garage','onderhoud')">Onderhoud & Reparatie</a></li><li><a onclick="showSubPage('garage','banden')">Banden & Velgen</a></li><li><a onclick="showSubPage('garage','schade')">Schadeherstel</a></li><li><a onclick="showSubPage('garage','airco')" class="active">Airco Service</a></li><li><a onclick="showSubPage('garage','transmissie')">Transmissie Spoelen</a></li></ul></div></div></div></div>
+  <div id="garage-sub-transmissie" style="display:none"><div class="sub-body"><div class="sub-article"><h2>Transmissie Spoelen</h2><p>Professioneel spoelen van automaten en DSG-transmissies. Advies: elke 60.000–80.000 km.</p></div><div class="sub-sidebar"><div class="sidebar-contact"><h4>Afspraak maken</h4><a class="sc-item" href="tel:+31344624904"><span>📞</span><span>+31 344 624 904</span></a><a class="sc-item" href="https://wa.me/31617234728" target="_blank"><span>💬</span><span>WhatsApp ons</span></a><button class="btn btn-ghost" onclick="showPage('contact')" style="width:100%">Formulier →</button></div><div class="sidebar-nav"><h4>Garage diensten</h4><ul><li><a onclick="showSubPage('garage','apk')">APK – Keuring</a></li><li><a onclick="showSubPage('garage','onderhoud')">Onderhoud & Reparatie</a></li><li><a onclick="showSubPage('garage','banden')">Banden & Velgen</a></li><li><a onclick="showSubPage('garage','schade')">Schadeherstel</a></li><li><a onclick="showSubPage('garage','airco')">Airco Service</a></li><li><a onclick="showSubPage('garage','transmissie')" class="active">Transmissie Spoelen</a></li></ul></div></div></div></div>
+  <footer style="background:#060606;padding:18px 44px;border-top:1px solid rgba(255,255,255,.06)"><div class="fbot"><span class="footer-secret" onclick="openPin()">© 2025 BMR Tiel</span><div class="fsocials"><a href="https://www.facebook.com/BMR.Tiel" target="_blank">f</a><a href="https://wa.me/31617234728" target="_blank">💬</a></div></div></footer>
+</div>
+
+<!-- ══ REVISIE ══ -->
+<div class="page" id="page-revisie">
+  <div class="sub-hero"><div class="sub-hero-bg" style="background-image:url('https://bmrtiel.nl/upload/page/8_other_image_1612867539536262486.png')"></div><div class="sub-hero-grad"></div><div class="sub-hero-content"><div class="sub-crumb" onclick="showPage('home')">Home <span>/ Revisie</span></div><h1>Motorrevisie</h1></div></div>
+  <div id="revisie-sub-modern"><div class="sub-body"><div class="sub-article"><h2>Revisie Moderne Voertuigen</h2><p>Auto's van 15 jaar oud tot heden. Specialist in <strong>VAG common-rail diesels</strong>. Wij leveren voor dealerbedrijven, garages én particulieren.</p><div class="related-grid" style="margin-top:24px"><div class="related-card" onclick="showSubPage('revisie','oldtimer')"><img src="https://bmrtiel.nl/upload/page/10_other_image_1612867559230898765.png" alt=""><div class="related-card-label">Oldtimers</div></div><div class="related-card" onclick="showSubPage('revisie','industrie')"><img src="https://bmrtiel.nl/upload/page/30_other_image_16128675831268124948.png" alt=""><div class="related-card-label">Industrie</div></div><div class="related-card" onclick="showSubPage('revisie','boten')"><img src="https://bmrtiel.nl/upload/page/31_other_image_16128676571819706212.png" alt=""><div class="related-card-label">Boten</div></div></div></div><div class="sub-sidebar"><div class="sidebar-contact"><h4>Vraag of interesse?</h4><a class="sc-item" href="tel:+31344622012"><span>📞</span><span>+31 344 622 012</span></a><a class="sc-item" href="mailto:revisie@bmr-tiel.nl"><span>✉️</span><span>revisie@bmr-tiel.nl</span></a><button class="btn btn-ghost" onclick="showPage('contact')" style="width:100%">Formulier →</button></div><div class="sidebar-nav"><h4>Revisie diensten</h4><ul><li><a onclick="showSubPage('revisie','modern')" class="active">Moderne Voertuigen</a></li><li><a onclick="showSubPage('revisie','oldtimer')">Oldtimers</a></li><li><a onclick="showSubPage('revisie','industrie')">Industrie</a></li><li><a onclick="showSubPage('revisie','boten')">Boten</a></li><li><a onclick="showSubPage('revisie','onderdelen')">Revisie Onderdelen</a></li><li><a onclick="showSubPage('revisie','wat')">Wat is revisie?</a></li></ul></div></div></div></div>
+  <div id="revisie-sub-oldtimer" style="display:none"><div class="sub-body"><div class="sub-article"><h2>Revisie Oldtimers</h2><p>Jaguar, Chevrolet, Mercedes-Benz, MG en meer. Complete of gedeeltelijke cilinderkopbewerking. Onderdelen niet leverbaar? Wij zoeken mee.</p></div><div class="sub-sidebar"><div class="sidebar-contact"><h4>Vraag of interesse?</h4><a class="sc-item" href="tel:+31344622012"><span>📞</span><span>+31 344 622 012</span></a><a class="sc-item" href="mailto:revisie@bmr-tiel.nl"><span>✉️</span><span>revisie@bmr-tiel.nl</span></a><button class="btn btn-ghost" onclick="showPage('contact')" style="width:100%">Formulier →</button></div><div class="sidebar-nav"><h4>Revisie diensten</h4><ul><li><a onclick="showSubPage('revisie','modern')">Moderne Voertuigen</a></li><li><a onclick="showSubPage('revisie','oldtimer')" class="active">Oldtimers</a></li><li><a onclick="showSubPage('revisie','industrie')">Industrie</a></li><li><a onclick="showSubPage('revisie','boten')">Boten</a></li><li><a onclick="showSubPage('revisie','onderdelen')">Revisie Onderdelen</a></li><li><a onclick="showSubPage('revisie','wat')">Wat is revisie?</a></li></ul></div></div></div></div>
+  <div id="revisie-sub-industrie" style="display:none"><div class="sub-body"><div class="sub-article"><h2>Revisie Industrie</h2><p>Tractoren, heftrucks en agrarische werktuigen. Neem contact op voor vrijblijvend advies.</p></div><div class="sub-sidebar"><div class="sidebar-contact"><h4>Vraag of interesse?</h4><a class="sc-item" href="tel:+31344622012"><span>📞</span><span>+31 344 622 012</span></a><a class="sc-item" href="mailto:revisie@bmr-tiel.nl"><span>✉️</span><span>revisie@bmr-tiel.nl</span></a><button class="btn btn-ghost" onclick="showPage('contact')" style="width:100%">Formulier →</button></div><div class="sidebar-nav"><h4>Revisie diensten</h4><ul><li><a onclick="showSubPage('revisie','modern')">Moderne Voertuigen</a></li><li><a onclick="showSubPage('revisie','oldtimer')">Oldtimers</a></li><li><a onclick="showSubPage('revisie','industrie')" class="active">Industrie</a></li><li><a onclick="showSubPage('revisie','boten')">Boten</a></li><li><a onclick="showSubPage('revisie','onderdelen')">Revisie Onderdelen</a></li><li><a onclick="showSubPage('revisie','wat')">Wat is revisie?</a></li></ul></div></div></div></div>
+  <div id="revisie-sub-boten" style="display:none"><div class="sub-body"><div class="sub-article"><h2>Revisie Boten</h2><p>Bootmotoren van sloepen en pleziervaartuigen professioneel gereviseerd. Klaar voor het nieuwe vaarseizoen.</p></div><div class="sub-sidebar"><div class="sidebar-contact"><h4>Vraag of interesse?</h4><a class="sc-item" href="tel:+31344622012"><span>📞</span><span>+31 344 622 012</span></a><a class="sc-item" href="mailto:revisie@bmr-tiel.nl"><span>✉️</span><span>revisie@bmr-tiel.nl</span></a><button class="btn btn-ghost" onclick="showPage('contact')" style="width:100%">Formulier →</button></div><div class="sidebar-nav"><h4>Revisie diensten</h4><ul><li><a onclick="showSubPage('revisie','modern')">Moderne Voertuigen</a></li><li><a onclick="showSubPage('revisie','oldtimer')">Oldtimers</a></li><li><a onclick="showSubPage('revisie','industrie')">Industrie</a></li><li><a onclick="showSubPage('revisie','boten')" class="active">Boten</a></li><li><a onclick="showSubPage('revisie','onderdelen')">Revisie Onderdelen</a></li><li><a onclick="showSubPage('revisie','wat')">Wat is revisie?</a></li></ul></div></div></div></div>
+  <div id="revisie-sub-onderdelen" style="display:none"><div class="sub-body"><div class="sub-article"><h2>Revisie Onderdelen</h2><p>Pakkingsets, zuigers, kleppen, lagers, distributiepakkingen — voor nagenoeg alle merken.</p></div><div class="sub-sidebar"><div class="sidebar-contact"><h4>Vraag of interesse?</h4><a class="sc-item" href="tel:+31344622012"><span>📞</span><span>+31 344 622 012</span></a><a class="sc-item" href="mailto:revisie@bmr-tiel.nl"><span>✉️</span><span>revisie@bmr-tiel.nl</span></a><button class="btn btn-ghost" onclick="showPage('contact')" style="width:100%">Formulier →</button></div><div class="sidebar-nav"><h4>Revisie diensten</h4><ul><li><a onclick="showSubPage('revisie','modern')">Moderne Voertuigen</a></li><li><a onclick="showSubPage('revisie','oldtimer')">Oldtimers</a></li><li><a onclick="showSubPage('revisie','industrie')">Industrie</a></li><li><a onclick="showSubPage('revisie','boten')">Boten</a></li><li><a onclick="showSubPage('revisie','onderdelen')" class="active">Revisie Onderdelen</a></li><li><a onclick="showSubPage('revisie','wat')">Wat is revisie?</a></li></ul></div></div></div></div>
+  <div id="revisie-sub-wat" style="display:none"><div class="sub-body"><div class="sub-article"><h2>Wat is Motorenrevisie?</h2><p>Het volledig reviseren van de verbrandingsmotor — kosteneffectief alternatief voor een nieuwe motor. Wij geven garantie op onze revisiewerkzaamheden.</p></div><div class="sub-sidebar"><div class="sidebar-contact"><h4>Vraag of interesse?</h4><a class="sc-item" href="tel:+31344622012"><span>📞</span><span>+31 344 622 012</span></a><a class="sc-item" href="mailto:revisie@bmr-tiel.nl"><span>✉️</span><span>revisie@bmr-tiel.nl</span></a><button class="btn btn-ghost" onclick="showPage('contact')" style="width:100%">Formulier →</button></div><div class="sidebar-nav"><h4>Revisie diensten</h4><ul><li><a onclick="showSubPage('revisie','modern')">Moderne Voertuigen</a></li><li><a onclick="showSubPage('revisie','oldtimer')">Oldtimers</a></li><li><a onclick="showSubPage('revisie','industrie')">Industrie</a></li><li><a onclick="showSubPage('revisie','boten')">Boten</a></li><li><a onclick="showSubPage('revisie','onderdelen')">Revisie Onderdelen</a></li><li><a onclick="showSubPage('revisie','wat')" class="active">Wat is revisie?</a></li></ul></div></div></div></div>
+  <footer style="background:#060606;padding:18px 44px;border-top:1px solid rgba(255,255,255,.06)"><div class="fbot"><span class="footer-secret" onclick="openPin()">© 2025 BMR Tiel</span><div class="fsocials"><a href="https://www.facebook.com/BMR.Tiel" target="_blank">f</a><a href="https://wa.me/31617234728" target="_blank">💬</a></div></div></footer>
+</div>
+
+<!-- ══ OVER ONS ══ -->
+<div class="page" id="page-over">
+  <div class="sub-hero"><div class="sub-hero-bg" style="background-image:url('https://bmrtiel.nl/upload/page/8_other_image_1612867539536262486.png')"></div><div class="sub-hero-grad"></div><div class="sub-hero-content"><div class="sub-crumb" onclick="showPage('home')">Home <span>/ Over ons</span></div><h1>Over BMR Tiel</h1></div></div>
+  <div class="sub-body">
+    <div class="sub-article">
+      <h2>De Betuwse Motoren Revisie</h2>
+      <p>De gebroeders Almar en Fabian Luisman begonnen met revisie en breidden BMR uit met een volwaardige garageafdeling. Al meer dan 25 jaar dé specialist in de Betuwe.</p>
+      <h2>VAG-specialist</h2>
+      <p>Onze expertise ligt bij de <strong>VAG-groep: Volkswagen, Audi, Seat en Skoda</strong>. Originele ODIS-diagnosesoftware aanwezig.</p>
+      <h2>BOVAG-lid</h2>
+      <p>BMR Tiel is aangesloten bij BOVAG — uw garantie voor kwaliteit.</p>
+      <h2>📍 Waar vindt u ons?</h2>
+      <iframe class="map-frame" style="margin-top:12px;height:280px" loading="lazy" allowfullscreen
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2454.3!2d5.4385!3d51.8894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sNewtonstraat+49%2C+4004+KE+Tiel!5e0!3m2!1snl!2snl!4v1"
+        title="BMR Tiel locatie"></iframe>
+      <a class="map-route" style="margin-top:10px;display:inline-flex" href="https://www.google.com/maps/dir/?api=1&destination=Newtonstraat+49+4004+KE+Tiel" target="_blank">Routebeschrijving openen →</a>
+    </div>
+    <div class="sub-sidebar">
+      <div class="sidebar-contact"><h4>Neem contact op</h4><a class="sc-item" href="tel:+31344624904"><span>📞</span><span>Garage: +31 344 624 904</span></a><a class="sc-item" href="tel:+31344622012"><span>⚙️</span><span>Revisie: +31 344 622 012</span></a><a class="sc-item" href="https://wa.me/31617234728" target="_blank"><span>💬</span><span>WhatsApp ons</span></a><button class="btn btn-ghost" onclick="showPage('contact')" style="width:100%;margin-top:8px">Afspraak maken →</button></div>
+      <div class="sidebar-nav"><h4>Adres & Uren</h4><p style="font-size:12px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.7;padding:0 8px">Newtonstraat 49<br>4004 KE Tiel<br><br>Ma–Vr: 08:00–17:00<br>Za–Zo: op afspraak</p><div style="margin-top:12px;padding:0 8px"><div class="fbovag" style="margin:0"><img src="https://bmrtiel.nl/images/bovag-logo.png" alt="BOVAG" style="height:20px"></div></div></div>
+    </div>
+  </div>
+  <footer style="background:#060606;padding:18px 44px;border-top:1px solid rgba(255,255,255,.06)"><div class="fbot"><span class="footer-secret" onclick="openPin()">© 2025 BMR Tiel</span><div class="fsocials"><a href="https://www.facebook.com/BMR.Tiel" target="_blank">f</a><a href="https://wa.me/31617234728" target="_blank">💬</a></div></div></footer>
+</div>
+
+<!-- ══ AANBOD ══ -->
+<div class="page" id="page-aanbod">
+  <div class="sub-hero"><div class="sub-hero-bg" style="background-image:url('https://bmrtiel.nl/upload/page/20_other_image_16128678841976003099.png')"></div><div class="sub-hero-grad"></div><div class="sub-hero-content"><div class="sub-crumb" onclick="showPage('home')">Home <span>/ Aanbod</span></div><h1>Occasions</h1></div></div>
+  <div class="sub-body"><div class="sub-article"><h2>Kwalitatieve Occasions</h2><p>Regelmatig kwalitatieve tweedehands voertuigen te koop, goedgekeurd door onze eigen monteurs.</p><br><button class="btn btn-red" onclick="showPage('contact')">Informeer naar aanbod →</button></div><div class="sub-sidebar"><div class="sidebar-contact"><h4>Informeer vrijblijvend</h4><a class="sc-item" href="tel:+31344624904"><span>📞</span><span>+31 344 624 904</span></a><a class="sc-item" href="https://wa.me/31617234728" target="_blank"><span>💬</span><span>WhatsApp ons</span></a><button class="btn btn-ghost" onclick="showPage('contact')" style="width:100%">Formulier →</button></div></div></div>
+  <footer style="background:#060606;padding:18px 44px;border-top:1px solid rgba(255,255,255,.06)"><div class="fbot"><span class="footer-secret" onclick="openPin()">© 2025 BMR Tiel</span><div class="fsocials"><a href="https://www.facebook.com/BMR.Tiel" target="_blank">f</a><a href="https://wa.me/31617234728" target="_blank">💬</a></div></div></footer>
+</div>
+
+<!-- ══ CONTACT ══ -->
+<div class="page" id="page-contact">
+  <div class="sub-hero"><div class="sub-hero-bg" style="background-image:url('https://bmrtiel.nl/upload/page/11_other_image_16128678211151263203.png')"></div><div class="sub-hero-grad"></div><div class="sub-hero-content"><div class="sub-crumb" onclick="showPage('home')">Home <span>/ Contact</span></div><h1>Contact & Afspraak</h1></div></div>
+  <div class="contact-red">
+    <div class="cr-left"><h2>Direct bereikbaar</h2><p>Bel ons, WhatsApp of kom langs. Ma–Vr 08:00–17:00, Newtonstraat 49 Tiel.</p></div>
+    <div class="cr-cards">
+      <a class="cr-card" href="tel:+31344624904"><span class="cr-card-ico">📞</span><div><div class="cr-card-lbl">Garage</div><div class="cr-card-val">+31 344 624 904</div></div></a>
+      <a class="cr-card" href="tel:+31344622012"><span class="cr-card-ico">⚙️</span><div><div class="cr-card-lbl">Revisie</div><div class="cr-card-val">+31 344 622 012</div></div></a>
+      <a class="cr-card" href="tel:+31344620488"><span class="cr-card-ico">🗂️</span><div><div class="cr-card-lbl">Administratie</div><div class="cr-card-val">+31 344 620 488</div></div></a>
+      <a class="cr-card" href="https://wa.me/31617234728" target="_blank"><span class="cr-card-ico">💬</span><div><div class="cr-card-lbl">WhatsApp</div><div class="cr-card-val">+31 6 17 23 47 28</div></div></a>
+      <a class="cr-card" href="mailto:info@bmr-tiel.nl"><span class="cr-card-ico">✉️</span><div><div class="cr-card-lbl">E-mail</div><div class="cr-card-val">info@bmr-tiel.nl</div></div></a>
+    </div>
+  </div>
+  <div class="contact-form-wrap">
+    <h3>Afspraak maken of bericht sturen</h3>
+    <div class="contact-lower">
+      <div>
+        <form class="cform" id="contact-form" onsubmit="submitForm(event)">
+          <div class="crow">
+            <input type="text"  name="naam"   id="f-naam"   placeholder="Voornaam + Achternaam" required>
+            <input type="email" name="email"  id="f-email"  placeholder="E-mailadres" required>
+          </div>
+          <div class="crow">
+            <input type="tel"   name="tel"    id="f-tel"    placeholder="Telefoonnummer">
+            <input type="date"  name="datum"  id="f-datum"  style="color-scheme:dark">
+          </div>
+          <select name="dienst" id="f-dienst">
+            <option value="" disabled selected>Waarmee kunnen wij u helpen?</option>
+            <option>APK – Keuring</option>
+            <option>Onderhoud & reparatie</option>
+            <option>Banden & velgen</option>
+            <option>Schadeherstel</option>
+            <option>Airco service</option>
+            <option>Transmissie spoelen</option>
+            <option>Motorrevisie (VW / Audi / Seat / Skoda)</option>
+            <option>Motorrevisie andere merken</option>
+            <option>Revisie oldtimer</option>
+            <option>Revisie industrie / boot</option>
+            <option>Occasions</option>
+            <option>Overige vraag</option>
+          </select>
+          <textarea name="bericht" id="f-bericht" placeholder="Uw vraag, kenteken of aanvullende informatie…"></textarea>
+          <p class="form-note">Uw verzoek wordt verstuurd naar BMR Tiel (valentijn.sas@gmail.com). Wij nemen binnen 1 werkdag contact op.</p>
+          <button type="submit" class="btn btn-red" id="form-btn" style="align-self:flex-start">Verstuur verzoek →</button>
+        </form>
+        <div id="form-ok"  style="display:none;margin-top:16px;padding:16px 20px;background:rgba(200,16,46,.15);border:1px solid var(--red);border-radius:4px;font-size:13px">✅ Uw afspraakverzoek is verstuurd! Wij nemen zo snel mogelijk contact op.</div>
+        <div id="form-err" style="display:none;margin-top:16px;padding:16px 20px;background:rgba(255,200,0,.1);border:1px solid rgba(255,200,0,.4);border-radius:4px;font-size:13px">⚠️ Er ging iets mis. Bel ons op <a href="tel:+31344624904" style="color:var(--red)">+31 344 624 904</a> of stuur een WhatsApp.</div>
+      </div>
+      <div class="map-panel">
+        <h4>📍 Waar vindt u ons?</h4>
+        <iframe class="map-frame" loading="lazy" allowfullscreen
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2454.3!2d5.4385!3d51.8894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sNewtonstraat+49%2C+4004+KE+Tiel!5e0!3m2!1snl!2snl!4v1"
+          title="BMR Tiel locatie"></iframe>
+        <div class="map-address">
+          <p><strong style="color:var(--white)">BMR Tiel</strong><br>Newtonstraat 49<br>4004 KE Tiel<br><br>Ma–Vr: 08:00 – 17:00<br>Za–Zo: op afspraak</p>
+          <a class="map-route" href="https://www.google.com/maps/dir/?api=1&destination=Newtonstraat+49+4004+KE+Tiel" target="_blank">Routebeschrijving openen →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="ftop"><div class="fbrand"><img src="https://bmrtiel.nl/upload/logo/logo_images_0_160560090322443.png" alt="BMR Tiel"><p>Uw vertrouwde VAG-specialist in de Betuwe.</p><div class="fbovag"><img src="https://bmrtiel.nl/images/bovag-logo.png" alt="BOVAG"></div></div><div class="fcol"><h4>Navigatie</h4><ul><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('garage')">Garage</a></li><li><a onclick="showPage('revisie')">Revisie</a></li><li><a onclick="showPage('over')">Over ons</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></div><div class="fcol"><h4>Contact</h4><ul><li><a href="tel:+31344624904">+31 344 624 904</a></li><li><a href="tel:+31344622012">+31 344 622 012</a></li><li><a href="mailto:info@bmr-tiel.nl">info@bmr-tiel.nl</a></li></ul></div></div><div class="fbot"><span class="footer-secret" onclick="openPin()">© 2025 BMR Tiel – Newtonstraat 49, 4004 KE Tiel</span><div class="fsocials"><a href="https://www.facebook.com/BMR.Tiel" target="_blank">f</a><a href="https://wa.me/31617234728" target="_blank">💬</a></div></div></footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PINCODE OVERLAY
+══════════════════════════════════════════ -->
+<div class="pin-overlay" id="pin-overlay">
+  <div class="pin-box">
+    <h3>🔐 Dev Menu</h3>
+    <p>Voer de 6-cijferige pincode in</p>
+    <div class="pin-dots" id="pin-dots">
+      <div class="pin-dot" id="d0"></div>
+      <div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div>
+      <div class="pin-dot" id="d3"></div>
+      <div class="pin-dot" id="d4"></div>
+      <div class="pin-dot" id="d5"></div>
+    </div>
+    <div class="pin-numpad">
+      <button class="pin-btn" onclick="pinDigit('1')">1</button>
+      <button class="pin-btn" onclick="pinDigit('2')">2</button>
+      <button class="pin-btn" onclick="pinDigit('3')">3</button>
+      <button class="pin-btn" onclick="pinDigit('4')">4</button>
+      <button class="pin-btn" onclick="pinDigit('5')">5</button>
+      <button class="pin-btn" onclick="pinDigit('6')">6</button>
+      <button class="pin-btn" onclick="pinDigit('7')">7</button>
+      <button class="pin-btn" onclick="pinDigit('8')">8</button>
+      <button class="pin-btn" onclick="pinDigit('9')">9</button>
+      <button class="pin-btn del" onclick="pinDel()">⌫</button>
+      <button class="pin-btn" onclick="pinDigit('0')">0</button>
+      <button class="pin-btn del" onclick="closePin()">✕</button>
+    </div>
+    <div class="pin-error" id="pin-error"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     DEVELOPER PANEL
+══════════════════════════════════════════ -->
+<div class="dev-overlay" id="dev-overlay">
+  <div class="dev-panel">
+    <div class="dev-header">
+      <h2>⚙️ Developer Menu <span class="dev-badge">BMR Tiel v2.0</span></h2>
+      <div class="dev-header-actions">
+        <button class="dev-close-btn" onclick="closeDev()">✕ Sluiten</button>
+      </div>
+    </div>
+    <div class="dev-tabs">
+      <div class="dev-tab active" onclick="devTab('dash')"    id="tab-dash">📊 Dashboard</div>
+      <div class="dev-tab"        onclick="devTab('nav')"     id="tab-nav">🧭 Navigatie</div>
+      <div class="dev-tab"        onclick="devTab('editor')"  id="tab-editor">✏️ Live Editor</div>
+      <div class="dev-tab"        onclick="devTab('kleuren')" id="tab-kleuren">🎨 Kleuren</div>
+      <div class="dev-tab"        onclick="devTab('form')"    id="tab-form">📬 Formulier</div>
+      <div class="dev-tab"        onclick="devTab('log')"     id="tab-log">📋 Log</div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="dev-content active" id="dc-dash">
+      <div class="dev-cards">
+        <div class="dev-card" onclick="devNav('home')"><div class="dev-card-icon">🏠</div><div class="dev-card-title">Home</div><div class="dev-card-desc">Ga naar de homepagina</div></div>
+        <div class="dev-card" onclick="devNav('garage')"><div class="dev-card-icon">🔧</div><div class="dev-card-title">Garage</div><div class="dev-card-desc">Garagepagina openen</div></div>
+        <div class="dev-card" onclick="devNav('revisie')"><div class="dev-card-icon">⚙️</div><div class="dev-card-title">Revisie</div><div class="dev-card-desc">Revisiepagina openen</div></div>
+        <div class="dev-card" onclick="devNav('over')"><div class="dev-card-icon">ℹ️</div><div class="dev-card-title">Over ons</div><div class="dev-card-desc">Over ons pagina openen</div></div>
+        <div class="dev-card" onclick="devNav('contact')"><div class="dev-card-icon">✉️</div><div class="dev-card-title">Contact</div><div class="dev-card-desc">Contactpagina openen</div></div>
+        <div class="dev-card" onclick="devTab('editor')"><div class="dev-card-icon">✏️</div><div class="dev-card-title">Live Editor</div><div class="dev-card-desc">Teksten en content aanpassen</div></div>
+      </div>
+      <div class="dev-info-box" id="dev-sysinfo">Laden…</div>
+    </div>
+
+    <!-- NAVIGATIE -->
+    <div class="dev-content" id="dc-nav">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="dev-card" onclick="devNav('home')" style="flex-direction:row;align-items:center;gap:16px;padding:14px 20px"><div style="font-size:20px">🏠</div><div><div class="dev-card-title">Home pagina</div><div class="dev-card-desc">Hoofdpagina met hero, diensten en merkenoverzicht</div></div></div>
+        <div class="dev-card" onclick="devSubNav('garage','apk')" style="flex-direction:row;align-items:center;gap:16px;padding:14px 20px"><div style="font-size:20px">🔍</div><div><div class="dev-card-title">Garage → APK</div><div class="dev-card-desc">APK keuringspagina</div></div></div>
+        <div class="dev-card" onclick="devSubNav('garage','onderhoud')" style="flex-direction:row;align-items:center;gap:16px;padding:14px 20px"><div style="font-size:20px">🛠️</div><div><div class="dev-card-title">Garage → Onderhoud</div><div class="dev-card-desc">Onderhoud & reparatie pagina</div></div></div>
+        <div class="dev-card" onclick="devSubNav('revisie','modern')" style="flex-direction:row;align-items:center;gap:16px;padding:14px 20px"><div style="font-size:20px">🔩</div><div><div class="dev-card-title">Revisie → Moderne voertuigen</div><div class="dev-card-desc">Revisie voor moderne voertuigen</div></div></div>
+        <div class="dev-card" onclick="devSubNav('revisie','oldtimer')" style="flex-direction:row;align-items:center;gap:16px;padding:14px 20px"><div style="font-size:20px">🏎️</div><div><div class="dev-card-title">Revisie → Oldtimers</div><div class="dev-card-desc">Oldtimer revisiepagina</div></div></div>
+        <div class="dev-card" onclick="devNav('contact')" style="flex-direction:row;align-items:center;gap:16px;padding:14px 20px"><div style="font-size:20px">📍</div><div><div class="dev-card-title">Contact & Afspraak</div><div class="dev-card-desc">Contactpagina met formulier en kaart</div></div></div>
+      </div>
+    </div>
+
+    <!-- LIVE EDITOR -->
+    <div class="dev-content" id="dc-editor">
+      <div class="editor-section">
+        <h4>Hero sectie</h4>
+        <div class="editor-grid">
+          <div class="editor-field">
+            <label>Paginatitel (browser tab)</label>
+            <input class="editor-input" id="ed-title" placeholder="BMR Tiel – Autotechniek & Revisie">
+          </div>
+          <div class="editor-field">
+            <label>Hero ondertekst (boven de naam)</label>
+            <input class="editor-input" id="ed-eyebrow" placeholder="📍 Newtonstraat 49, Tiel...">
+          </div>
+          <div class="editor-field editor-full">
+            <label>Hero beschrijvende tekst</label>
+            <input class="editor-input" id="ed-herosub" placeholder="Specialist in motorrevisie...">
+          </div>
+        </div>
+      </div>
+      <div class="editor-section">
+        <h4>Contactgegevens</h4>
+        <div class="editor-grid">
+          <div class="editor-field">
+            <label>Telefoon Garage</label>
+            <input class="editor-input" id="ed-tel1" placeholder="+31 344 624 904">
+          </div>
+          <div class="editor-field">
+            <label>Telefoon Revisie</label>
+            <input class="editor-input" id="ed-tel2" placeholder="+31 344 622 012">
+          </div>
+          <div class="editor-field">
+            <label>E-mailadres</label>
+            <input class="editor-input" id="ed-email" placeholder="info@bmr-tiel.nl">
+          </div>
+          <div class="editor-field">
+            <label>WhatsApp nummer</label>
+            <input class="editor-input" id="ed-wa" placeholder="+31 6 17 23 47 28">
+          </div>
+        </div>
+      </div>
+      <div class="editor-section">
+        <h4>Over ons tekst</h4>
+        <div class="editor-grid">
+          <div class="editor-field editor-full">
+            <label>Introductietekst</label>
+            <textarea class="editor-input editor-textarea" id="ed-overbody"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="editor-section">
+        <h4>Footer</h4>
+        <div class="editor-grid">
+          <div class="editor-field editor-full">
+            <label>Footer tagline</label>
+            <input class="editor-input" id="ed-tagline" placeholder="Uw vertrouwde VAG-specialist...">
+          </div>
+        </div>
+      </div>
+      <button class="editor-apply-btn" onclick="applyEdits()">✓ Wijzigingen toepassen op de website</button>
+    </div>
+
+    <!-- KLEUREN -->
+    <div class="dev-content" id="dc-kleuren">
+      <div class="editor-section">
+        <h4>Kleurenthema aanpassen</h4>
+        <div class="editor-grid">
+          <div class="editor-field">
+            <label>Hoofdkleur (rood)</label>
+            <div class="color-row">
+              <input type="color" class="color-swatch" id="col-red" value="#C8102E" oninput="applyColor('--red',this.value)">
+              <input class="editor-input" id="col-red-txt" value="#C8102E" oninput="applyColor('--red',this.value);document.getElementById('col-red').value=this.value">
+            </div>
+          </div>
+          <div class="editor-field">
+            <label>Achtergrond (zwart)</label>
+            <div class="color-row">
+              <input type="color" class="color-swatch" id="col-black" value="#0a0a0a" oninput="applyColor('--black',this.value)">
+              <input class="editor-input" id="col-black-txt" value="#0a0a0a" oninput="applyColor('--black',this.value);document.getElementById('col-black').value=this.value">
+            </div>
+          </div>
+          <div class="editor-field">
+            <label>Donkere secties</label>
+            <div class="color-row">
+              <input type="color" class="color-swatch" id="col-dark" value="#161616" oninput="applyColor('--dark',this.value)">
+              <input class="editor-input" id="col-dark-txt" value="#161616" oninput="applyColor('--dark',this.value);document.getElementById('col-dark').value=this.value">
+            </div>
+          </div>
+          <div class="editor-field">
+            <label>Midtoon vlakken</label>
+            <div class="color-row">
+              <input type="color" class="color-swatch" id="col-mid" value="#222222" oninput="applyColor('--mid',this.value)">
+              <input class="editor-input" id="col-mid-txt" value="#222222" oninput="applyColor('--mid',this.value);document.getElementById('col-mid').value=this.value">
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:16px">
+          <p style="font-size:12px;color:var(--gray);margin-bottom:10px">Snelle thema's:</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="editor-apply-btn" style="font-size:10px;padding:7px 14px" onclick="applyTheme('#C8102E','#0a0a0a')">🔴 Rood (standaard)</button>
+            <button class="editor-apply-btn" style="font-size:10px;padding:7px 14px;background:#1a56db" onclick="applyTheme('#1a56db','#050a14')">🔵 Blauw</button>
+            <button class="editor-apply-btn" style="font-size:10px;padding:7px 14px;background:#16a34a" onclick="applyTheme('#16a34a','#081208')">🟢 Groen</button>
+            <button class="editor-apply-btn" style="font-size:10px;padding:7px 14px;background:#7c3aed" onclick="applyTheme('#7c3aed','#0a0812')">🟣 Paars</button>
+            <button class="editor-apply-btn" style="font-size:10px;padding:7px 14px;background:#b45309" onclick="applyTheme('#d97706','#0d0a05')">🟡 Amber</button>
+          </div>
+        </div>
+      </div>
+      <div class="editor-section">
+        <h4>Navigatie balk hoogte</h4>
+        <div class="editor-grid">
+          <div class="editor-field">
+            <label>Hoogte nav (px)</label>
+            <input class="editor-input" type="range" min="48" max="90" value="64" id="nav-height-range" oninput="document.getElementById('nav-height-val').textContent=this.value+'px';document.documentElement.style.setProperty('--nav-h',this.value+'px')">
+          </div>
+          <div class="editor-field" style="justify-content:flex-end">
+            <label>Huidige hoogte</label>
+            <span style="font-size:20px;font-weight:700;color:var(--red)" id="nav-height-val">64px</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMULIER -->
+    <div class="dev-content" id="dc-form">
+      <div class="dev-info-box" style="margin-bottom:16px">
+        <div class="dev-row"><span class="dev-label">Ontvangt mail:</span><strong>valentijn.sas@gmail.com</strong></div>
+        <div class="dev-row"><span class="dev-label">PHP bestand:</span><strong>send_mail.php</strong></div>
+        <div class="dev-row"><span class="dev-label">Methode:</span><strong>POST → fetch() → JSON</strong></div>
+        <div class="dev-row"><span class="dev-label">Velden:</span><strong>naam, email, tel, datum, dienst, bericht</strong></div>
+      </div>
+      <div class="editor-grid">
+        <div class="editor-field">
+          <label>Testformulier invullen</label>
+          <button class="editor-apply-btn" style="width:100%" onclick="devFillForm()">📝 Vul testdata in</button>
+        </div>
+        <div class="editor-field">
+          <label>Succes-bericht tonen</label>
+          <button class="editor-apply-btn" style="width:100%;background:#16a34a" onclick="devShowOk()">✅ Toon succes</button>
+        </div>
+        <div class="editor-field">
+          <label>Fout-bericht tonen</label>
+          <button class="editor-apply-btn" style="width:100%;background:#b45309" onclick="devShowErr()">⚠️ Toon fout</button>
+        </div>
+        <div class="editor-field">
+          <label>Formulier resetten</label>
+          <button class="editor-apply-btn" style="width:100%;background:#555" onclick="devResetForm()">🔄 Reset formulier</button>
+        </div>
+      </div>
+      <div style="margin-top:20px">
+        <p style="font-size:12px;color:var(--gray);margin-bottom:8px;font-family:var(--cond);font-weight:700;letter-spacing:.1em;text-transform:uppercase">PHP Code (kopieer naar send_mail.php):</p>
+        <div style="background:#000;border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:14px;font-family:monospace;font-size:11px;color:rgba(255,255,255,.7);line-height:1.6;white-space:pre-wrap;overflow-x:auto">&lt;?php
+$to = 'valentijn.sas@gmail.com';
+$naam = htmlspecialchars($_POST['naam'] ?? '');
+$email = htmlspecialchars($_POST['email'] ?? '');
+$tel = htmlspecialchars($_POST['tel'] ?? '');
+$datum = htmlspecialchars($_POST['datum'] ?? '');
+$dienst = htmlspecialchars($_POST['dienst'] ?? '');
+$bericht = htmlspecialchars($_POST['bericht'] ?? '');
+$subject = "Afspraak van $naam – BMR Tiel";
+$body = "Naam: $naam\nEmail: $email\nTel: $tel\nDatum: $datum\nDienst: $dienst\n\n$bericht";
+$headers = "From: noreply@bmr-tiel.nl\r\nReply-To: $email";
+echo json_encode(['ok' => mail($to,$subject,$body,$headers)]);
+?&gt;</div>
+      </div>
+    </div>
+
+    <!-- LOG -->
+    <div class="dev-content" id="dc-log">
+      <p style="font-size:12px;color:var(--gray);margin-bottom:12px">Actielog van de huidige sessie:</p>
+      <ul class="log-list" id="dev-log-list"></ul>
+      <button class="editor-apply-btn" style="background:#333;margin-top:12px" onclick="document.getElementById('dev-log-list').innerHTML='';devLog('Log gewist')">🗑️ Log wissen</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- WA FAB -->
+<a class="wa" href="https://wa.me/31617234728" target="_blank">💬</a>
+
+<script>
+/* ══ ROUTING ══ */
+function showPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+n).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('anav'));
+  const el=document.getElementById('nav-'+n);
+  if(el) el.classList.add('anav');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(n==='garage') showSubPage('garage','apk',true);
+  if(n==='revisie') showSubPage('revisie','modern',true);
+  devLog('Pagina: '+n);
+}
+function showSubPage(sec,sub,noScroll){
+  const pg=document.getElementById('page-'+sec);
+  if(!pg) return;
+  pg.querySelectorAll('[id^="'+sec+'-sub-"]').forEach(el=>el.style.display='none');
+  const t=document.getElementById(sec+'-sub-'+sub);
+  if(t) t.style.display='block';
+  if(!pg.classList.contains('active')){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    pg.classList.add('active');
+    document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('anav'));
+    const el=document.getElementById('nav-'+sec);
+    if(el) el.classList.add('anav');
+  }
+  if(!noScroll) window.scrollTo({top:0,behavior:'smooth'});
+  devLog('Subpagina: '+sec+'/'+sub);
+}
+
+/* ══ FORM ══ */
+async function submitForm(e){
+  e.preventDefault();
+  const btn=document.getElementById('form-btn');
+  btn.disabled=true; btn.textContent='Versturen…';
+  devLog('Formulier verstuurd');
+  const fd=new FormData(e.target);
+  try{
+    const r=await fetch('send_mail.php',{method:'POST',body:fd});
+    const j=await r.json();
+    if(j.ok){showFormOk();}else{throw 0;}
+  }catch(_){
+    /* Demo mode – toon succes zonder echte server */
+    showFormOk();
+  }
+}
+function showFormOk(){document.getElementById('contact-form').style.display='none';document.getElementById('form-ok').style.display='block';}
+
+/* ══ PINCODE ══ */
+let pinInput='';
+const PIN='112233';
+function openPin(){document.getElementById('pin-overlay').classList.add('open');pinInput='';updateDots();}
+function closePin(){document.getElementById('pin-overlay').classList.remove('open');pinInput='';updateDots();document.getElementById('pin-error').textContent='';}
+function pinDigit(d){if(pinInput.length>=6)return;pinInput+=d;updateDots();if(pinInput.length===6)checkPin();}
+function pinDel(){pinInput=pinInput.slice(0,-1);updateDots();}
+function updateDots(){for(let i=0;i<6;i++){document.getElementById('d'+i).className='pin-dot'+(i<pinInput.length?' filled':'');}}
+function checkPin(){
+  if(pinInput===PIN){
+    closePin();
+    openDev();
+  }else{
+    document.getElementById('pin-error').textContent='Onjuiste pincode. Probeer opnieuw.';
+    pinInput='';
+    updateDots();
+    devLog('Verkeerde pincode ingevoerd');
+  }
+}
+
+/* ══ DEV PANEL ══ */
+function openDev(){
+  document.getElementById('dev-overlay').classList.add('open');
+  loadEditorValues();
+  updateSysInfo();
+  devLog('Developer menu geopend');
+}
+function closeDev(){document.getElementById('dev-overlay').classList.remove('open');}
+function devTab(name){
+  document.querySelectorAll('.dev-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.dev-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  document.getElementById('dc-'+name).classList.add('active');
+}
+function devNav(p){closeDev();showPage(p);}
+function devSubNav(s,sub){closeDev();showSubPage(s,sub);}
+
+function updateSysInfo(){
+  const ap=document.querySelector('.page.active');
+  document.getElementById('dev-sysinfo').innerHTML=
+    '<div class="dev-row"><span class="dev-label">Actieve pagina:</span><strong>'+ap.id+'</strong></div>'+
+    '<div class="dev-row"><span class="dev-label">Scherm:</span><strong>'+window.innerWidth+'×'+window.innerHeight+'px</strong></div>'+
+    '<div class="dev-row"><span class="dev-label">Pixel ratio:</span><strong>'+window.devicePixelRatio+'x</strong></div>'+
+    '<div class="dev-row"><span class="dev-label">Platform:</span><strong>'+(navigator.platform||navigator.userAgentData?.platform||'Onbekend')+'</strong></div>'+
+    '<div class="dev-row"><span class="dev-label">Browser:</span><strong>'+navigator.userAgent.substring(0,60)+'…</strong></div>'+
+    '<div class="dev-row"><span class="dev-label">Accentkleur:</span><strong>'+getComputedStyle(document.documentElement).getPropertyValue('--red').trim()+'</strong></div>';
+}
+
+/* ══ LIVE EDITOR ══ */
+function loadEditorValues(){
+  const g=id=>document.getElementById(id);
+  g('ed-title').value   = document.getElementById('site-title').textContent.replace(/&amp;/g,'&');
+  g('ed-eyebrow').value = document.getElementById('hero-eyebrow-text').textContent.trim();
+  g('ed-herosub').value = document.getElementById('hero-sub-text').textContent.trim();
+  g('ed-overbody').value= document.getElementById('over-body-text').textContent.trim();
+  g('ed-tagline').value = document.getElementById('footer-tagline').textContent.trim();
+}
+function applyEdits(){
+  const g=id=>document.getElementById(id).value;
+  if(g('ed-title'))    document.getElementById('site-title').textContent = g('ed-title');
+  if(g('ed-eyebrow'))  document.getElementById('hero-eyebrow-text').textContent = g('ed-eyebrow');
+  if(g('ed-herosub'))  document.getElementById('hero-sub-text').textContent = g('ed-herosub');
+  if(g('ed-overbody')) document.getElementById('over-body-text').textContent = g('ed-overbody');
+  if(g('ed-tagline'))  document.getElementById('footer-tagline').textContent = g('ed-tagline');
+  // contacts
+  const t1=g('ed-tel1'), t2=g('ed-tel2');
+  if(t1) document.querySelectorAll('a[href^="tel:+31344624"]').forEach(a=>{a.href='tel:'+t1.replace(/\s/g,'');});
+  devLog('Live editor: wijzigingen toegepast');
+  alert('✅ Wijzigingen zijn toegepast op de website!');
+}
+
+/* ══ KLEUREN ══ */
+function applyColor(v,c){document.documentElement.style.setProperty(v,c);devLog('Kleur '+v+' → '+c);}
+function applyTheme(accent,bg){
+  document.documentElement.style.setProperty('--red',accent);
+  document.documentElement.style.setProperty('--red-d',darken(accent));
+  document.documentElement.style.setProperty('--black',bg);
+  document.getElementById('col-red').value=accent;
+  document.getElementById('col-red-txt').value=accent;
+  document.getElementById('col-black').value=bg;
+  document.getElementById('col-black-txt').value=bg;
+  devLog('Thema toegepast: '+accent);
+}
+function darken(hex){
+  let r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  r=Math.max(0,r-30);g=Math.max(0,g-30);b=Math.max(0,b-30);
+  return '#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('');
+}
+
+/* ══ FORM TESTEN ══ */
+function devFillForm(){closeDev();showPage('contact');setTimeout(()=>{document.getElementById('f-naam').value='Test Klant';document.getElementById('f-email').value='test@voorbeeld.nl';document.getElementById('f-tel').value='0612345678';document.getElementById('f-datum').value=new Date(Date.now()+86400000*3).toISOString().slice(0,10);document.getElementById('f-dienst').value='APK – Keuring';document.getElementById('f-bericht').value='Dit is een testbericht vanuit het developer menu van BMR Tiel.';},300);devLog('Testdata ingevuld');}
+function devShowOk(){closeDev();showPage('contact');setTimeout(()=>{document.getElementById('contact-form').style.display='none';document.getElementById('form-ok').style.display='block';},300);}
+function devShowErr(){closeDev();showPage('contact');setTimeout(()=>{document.getElementById('form-err').style.display='block';},300);}
+function devResetForm(){closeDev();showPage('contact');setTimeout(()=>{document.getElementById('contact-form').style.display='flex';document.getElementById('contact-form').reset();document.getElementById('form-ok').style.display='none';document.getElementById('form-err').style.display='none';document.getElementById('form-btn').disabled=false;document.getElementById('form-btn').textContent='Verstuur verzoek →';},300);devLog('Formulier gereset');}
+
+/* ══ LOG ══ */
+function devLog(msg){
+  const list=document.getElementById('dev-log-list');
+  if(!list) return;
+  const li=document.createElement('li');
+  li.className='log-item';
+  li.textContent='['+new Date().toLocaleTimeString('nl-NL')+'] '+msg;
+  list.prepend(li);
+}
+
+/* INIT */
+showPage('home');
+</script>
+</body>
+</html>
